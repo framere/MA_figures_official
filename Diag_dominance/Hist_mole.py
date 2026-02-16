@@ -40,7 +40,7 @@ for mol in molecule_names:
 
     # Final sampled values
     sampled_values = values.loc[sampled_indices]
-    sampled_values = sampled_values[sampled_values > 5e1]  # Ensure all values are positive
+    # sampled_values = sampled_values[sampled_values > 5e1]  # Ensure all values are positive
     if len(sampled_values) == 0:
         print(f"Skipping {mol}: no valid positive values.")
         continue
@@ -57,7 +57,7 @@ for mol in molecule_names:
     bins = np.logspace(np.log10(vmin), np.log10(vmax), num=n_bins)
 
     plt.figure(figsize=(8, 6))
-    sns.histplot(sampled_values, bins=bins, color=colors[0])
+    sns.histplot(sampled_values, bins=bins, color=colors[3], edgecolor=None)
     plt.xscale('log')
     plt.xlabel(r"$r_{ij} = a_{ii}$ / $a_{ij}$")
     plt.ylabel("Frequency")
@@ -71,8 +71,8 @@ for mol in molecule_names:
     # Draw grid only at major ticks
     plt.grid(True, which='major', ls='--', lw=0.8, alpha=0.6)
 
-    plt.title(f"Element-wise ratio (He)")
-    sns.despine()
+    plt.title(f"Element-wise ratio (Uracil)")
+    # sns.despine()
     plt.tight_layout()
     plt.savefig(f"histo_diag_dom_{mol}_sampled.pdf")
     plt.close()
